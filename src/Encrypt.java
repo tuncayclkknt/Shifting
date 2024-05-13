@@ -14,6 +14,28 @@ public class Encrypt {
         }
     }
 
+    public void shiftCipher(String message,int shifting){
+
+        System.out.print("Shift cipher enc. message: ");
+
+        for (int i = 0; i < message.length(); i++) {
+
+            char yeniH = ' ';
+            if (alphabet.contains(message.charAt(i))) {
+                int eskiHI = alphabet.indexOf(message.charAt(i));
+                yeniH = alphabet.get(((eskiHI + shifting) + 26) % 26);
+
+            } else {
+                int eskiHI = ALPHABET.indexOf(message.charAt(i));
+                if (message.charAt(i) != ' ') {
+                    yeniH = ALPHABET.get(((eskiHI + shifting) + 26) % 26);
+                }
+            }
+            System.out.print(yeniH);
+        }
+        System.out.println();
+    }
+
     public void encShiftCipher(String message) {
 
         char a;
@@ -38,28 +60,6 @@ public class Encrypt {
         }
     }
 
-
-    public void shiftCipher(String message,int shifting){
-
-        System.out.print("Shift cipher enc. message: ");
-
-        for (int i = 0; i < message.length(); i++) {
-
-            char yeniH = ' ';
-            if (alphabet.contains(message.charAt(i))) {
-                int eskiHI = alphabet.indexOf(message.charAt(i));
-                yeniH = alphabet.get(((eskiHI + shifting) + 26) % 26);
-
-            } else {
-                int eskiHI = ALPHABET.indexOf(message.charAt(i));
-                if (message.charAt(i) != ' ') {
-                    yeniH = ALPHABET.get(((eskiHI + shifting) + 26) % 26);
-                }
-            }
-            System.out.print(yeniH);
-        }
-        System.out.println();
-    }
 
     public void affineCipher(String message){
         // E(x) = (ax + b) mod m
@@ -93,7 +93,7 @@ public class Encrypt {
                 int eskiHI = alphabet.indexOf(message.charAt(i));
                 yeniH = alphabet.get((Main.modInverse(key1) * ((eskiHI - key2) + 26)) % 26);
                 System.out.print(yeniH);
-            }else{
+            }else {
                 if (message.charAt(i) == ' ')
                     System.out.print(" ");
                 else {

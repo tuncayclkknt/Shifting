@@ -6,7 +6,7 @@ public class Main {
 
         e1.initializeAlphabet();
 
-        e1.shiftCipher("Tunc ay",16);
+        e1.shiftCipher("Tuncay",16);
 //        e1.encShiftCipher("Jkdsqo");
 
         e1.affineCipher("Tuncay Celikkanat");
