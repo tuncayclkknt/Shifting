@@ -14,77 +14,95 @@ public class Encrypt {
         }
     }
 
-    public void sifrecoz(String message){
+    public void encShiftCipher(String message) {
 
-        char a = ' ';
-        for (int j = 1; j<=26; j++){
+        char a;
+        for (int j = 1; j < 26; j++) {
             System.out.print("The message for shift is " + j + ": ");
-            for (int i=0; i<message.length(); i++) {
+            for (int i = 0; i < message.length(); i++) {
                 a = message.charAt(i);
 
                 if (alphabet.contains(a)) {
+                    a = alphabet.get(((alphabet.indexOf(a) - j) + 26) % 26);
+                    System.out.print(a);
 
-                    if (message.charAt(i) == ' ') {
-                        System.out.print(" ");
-                    } else if ((alphabet.indexOf(a) + j) <= 25) {
-
-                        a = alphabet.get(alphabet.indexOf(a) + j);
-                        System.out.print(a);
-                    } else {
-                        a = alphabet.get(alphabet.indexOf(a) + j - 26);
-                        System.out.print(a);
-                    }
                 } else {
 
-                    if (message.charAt(i) == ' ') {
+                    if (message.charAt(i) == ' ')
                         System.out.print(" ");
-                    } else if ((ALPHABET.indexOf(a) + j) <= 25) {
-
-                        a = ALPHABET.get(ALPHABET.indexOf(a) + j);
-                        System.out.print(a);
-                    } else {
-                        a = ALPHABET.get(ALPHABET.indexOf(a) + j - 26);
-                        System.out.print(a);
-                    }
+                    a = ALPHABET.get(((ALPHABET.indexOf(a) - j) + 26) % 26);
+                    System.out.print(a);
                 }
             }
             System.out.println();
         }
     }
 
-    public void sifrele(String message, int shifting){
 
-        System.out.print("New message: ");
+    public void shiftCipher(String message,int shifting){
 
-        for (int i=0; i<message.length(); i++){
+        System.out.print("Shift cipher enc. message: ");
+
+        for (int i = 0; i < message.length(); i++) {
 
             char yeniH = ' ';
-            if (alphabet.contains(message.charAt(i))){
+            if (alphabet.contains(message.charAt(i))) {
                 int eskiHI = alphabet.indexOf(message.charAt(i));
-                if (message.charAt(i) != ' '){
+                yeniH = alphabet.get(((eskiHI + shifting) + 26) % 26);
 
-                    if ((eskiHI - shifting) >= 0 ){
-                        yeniH = alphabet.get(eskiHI - shifting);
-                    }
-                    else{
-                        yeniH = alphabet.get(26 + (eskiHI - shifting));
-                    }
-                }
-            }else {
-
+            } else {
                 int eskiHI = ALPHABET.indexOf(message.charAt(i));
-                if (message.charAt(i) != ' '){
-
-                    if ((eskiHI - shifting) >= 0 ){
-                        yeniH = ALPHABET.get(eskiHI - shifting);
-                    }
-                    else{
-                        yeniH = ALPHABET.get(26 + (eskiHI - shifting));
-                    }
+                if (message.charAt(i) != ' ') {
+                    yeniH = ALPHABET.get(((eskiHI + shifting) + 26) % 26);
                 }
             }
             System.out.print(yeniH);
         }
         System.out.println();
+    }
+
+    public void affineCipher(String message){
+        // E(x) = (ax + b) mod m
+        // m=26, a=5(key1), b=8(key2)
+        System.out.print("Affine cipher enc. message: ");
+        for (int i = 0; i < message.length(); i++) {
+            char yeniH = ' ';
+
+            if (alphabet.contains(message.charAt(i))) {
+
+                int eskiHI = alphabet.indexOf(message.charAt(i));
+                yeniH = alphabet.get(((eskiHI * 5 + 8) + 26) % 26);
+
+            }else{
+                int eskiHI = ALPHABET.indexOf(message.charAt(i));
+                if (message.charAt(i) != ' ') {
+                    yeniH = ALPHABET.get(((eskiHI * 5 + 8) + 26) % 26);
+                }
+            }
+            System.out.print(yeniH);
+        }
+        System.out.println();
+    }
+
+    public void encAffineCipher(String message, int key1, int key2){
+
+        System.out.print("Çözümlenmii affice cipher message: ");
+        for (int i = 0; i < message.length(); i++) {
+            char yeniH;
+            if (alphabet.contains(message.charAt(i))) {
+                int eskiHI = alphabet.indexOf(message.charAt(i));
+                //yeniH = alphabet.get(((Main.modInverse(key1)*(eskiHI - key2)) + 52) % 26);
+                yeniH = alphabet.get((Main.modInverse(key1) * ((eskiHI - key2) + 26)) % 26);
+                System.out.print(yeniH);
+            }else{
+                if (message.charAt(i) == ' ')
+                    System.out.print(" ");
+                else {
+                    int eskiHI = ALPHABET.indexOf(message.charAt(i));
+                    yeniH = ALPHABET.get((Main.modInverse(key1) * ((eskiHI - key2) + 26)) % 26);
+                    System.out.print(yeniH);
+                }
+            }
+        }
     }
 }
