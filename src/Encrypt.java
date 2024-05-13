@@ -91,7 +91,6 @@ public class Encrypt {
             char yeniH;
             if (alphabet.contains(message.charAt(i))) {
                 int eskiHI = alphabet.indexOf(message.charAt(i));
-                //yeniH = alphabet.get(((Main.modInverse(key1)*(eskiHI - key2)) + 52) % 26);
                 yeniH = alphabet.get((Main.modInverse(key1) * ((eskiHI - key2) + 26)) % 26);
                 System.out.print(yeniH);
             }else{
