@@ -5,14 +5,19 @@ public class Main {
         Encrypt e1 = new Encrypt();
 
         e1.initializeAlphabet();
-
-        e1.shiftCipher("Tuncay",16);
+//
+//        e1.shiftCipher("Tuncay",16);
 //        e1.encShiftCipher("Jkdsqo");
+//
+//        System.out.println(modInverse(5));
+//
+        e1.affineCipher("rv");
+        e1.encAffineCipher("pj", 5, 8);
 
-        e1.affineCipher("Tuncay Celikkanat");
-        e1.encAffineCipher("Zevsiy Sclwggiviz", 5, 8);
+        e1.findKeysForAffine("ug","em");
 
     }
+
     public static int modInverse(int num) {
 
         num = num % 26;

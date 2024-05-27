@@ -104,4 +104,20 @@ public class Encrypt {
             }
         }
     }
+
+    public void findKeysForAffine(String orjMess, String encMess){
+        int p1 = alphabet.indexOf(orjMess.charAt(0));
+        int c1 = alphabet.indexOf(encMess.charAt(0));
+
+        int p2 = alphabet.indexOf(orjMess.charAt(1));
+        int c2 = alphabet.indexOf(encMess.charAt(1));
+
+        int pFark = p1 - p2;
+        int cFark = c1 - c2;
+
+        int a = ((1 * (cFark + 26)) % 26);
+        int b = ((c1 % 26) - ((a * p1) % 26)) % 26;
+
+        System.out.printf("Your keys:%na: %d, b: %d", a, b);
+    }
 }
